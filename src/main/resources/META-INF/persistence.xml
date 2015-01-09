@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="MYAPP" transaction-type="RESOURCE_LOCAL">
+        <class>at.struct.openjpatest.entities.Customer</class>
+        
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:/tmp/openjpatestdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9099"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.upassword" value=""/>
+
+<!--
+            We do NOT create the db via OpenJPA but via sql-maven-plugin
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+-->
+            <property name="openjpa.Log" value="DefaultLevel=INFO, SQL=TRACE"/>
+            <property name="openjpa.ConnectionFactoryProperties"
+                      value="PrettyPrint=true, PrettyPrintLineLength=200, PrintParameters=True"/>
+
+            <!-- sollluuuuuschnnnn -->
+            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1))"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
