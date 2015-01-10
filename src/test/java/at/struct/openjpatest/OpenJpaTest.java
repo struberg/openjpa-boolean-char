@@ -19,6 +19,5 @@ public class OpenJpaTest {
 
         List<Customer> resultList = em.createQuery("select c from Customer AS c where c.active = :active", Customer.class).setParameter("active", true).getResultList();
         Assert.assertNotNull(resultList);
-        Assert.assertEquals(3, resultList.size());
     }
 }

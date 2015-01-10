@@ -15,14 +15,19 @@
 
 <!--
             We do NOT create the db via OpenJPA but via sql-maven-plugin
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
 -->
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+
             <property name="openjpa.Log" value="DefaultLevel=INFO, SQL=TRACE"/>
             <property name="openjpa.ConnectionFactoryProperties"
                       value="PrettyPrint=true, PrettyPrintLineLength=200, PrintParameters=True"/>
 
-            <!-- sollluuuuuschnnnn -->
-            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1))"/>
+            <!--
+                Helps to create the right schema but doesn't affect the value.
+                So far only @ExternalValues({"true=1", "false=0"})  +  @Type(String.class) did help.
+                But we would need to apply this to all Boolean fields manually
+            -->
+            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1))"/>
 
         </properties>
     </persistence-unit>
