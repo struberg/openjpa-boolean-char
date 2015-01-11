@@ -17,7 +17,17 @@ public class Customer {
 
     private String name;
 
+    /**
+     * This is a Boolean object which might be null
+     */
+    @Column(nullable = true)
     private Boolean active;
+
+    /**
+     * this is a native boolean datatype which obviously cannot be null.
+     */
+    @Column(nullable = false)
+    private boolean specialCustomer;
 
     public Long getId() {
         return id;
@@ -41,5 +51,13 @@ public class Customer {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public boolean isSpecialCustomer() {
+        return specialCustomer;
+    }
+
+    public void setSpecialCustomer(boolean specialCustomer) {
+        this.specialCustomer = specialCustomer;
     }
 }
