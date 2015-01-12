@@ -11,12 +11,14 @@
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:/tmp/openjpatestdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9099"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.upassword" value=""/>
+            <property name="javax.persistence.jdbc.password" value=""/>
 
 <!--
             We do NOT create the db via OpenJPA but via sql-maven-plugin
 -->
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+            <property name="openjpa.DynamicEnhancementAgent" value="false"/>
+            <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 
             <property name="openjpa.Log" value="DefaultLevel=INFO, SQL=TRACE"/>
             <property name="openjpa.ConnectionFactoryProperties"
@@ -27,7 +29,12 @@
                 So far only @ExternalValues({"true=1", "false=0"})  +  @Type(String.class) did help.
                 But we would need to apply this to all Boolean fields manually
             -->
-            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1))"/>
+<!--
+            <property name="openjpa.jdbc.DBDictionary"
+                      value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1),BooleanRepresentation=STRING_10)"/>
+-->
+            <property name="openjpa.jdbc.DBDictionary"
+                      value="(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1),BooleanRepresentation=STRING_10)"/>
 
         </properties>
     </persistence-unit>
