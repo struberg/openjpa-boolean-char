@@ -29,10 +29,6 @@
                 So far only @ExternalValues({"true=1", "false=0"})  +  @Type(String.class) did help.
                 But we would need to apply this to all Boolean fields manually
             -->
-<!--
-            <property name="openjpa.jdbc.DBDictionary"
-                      value="org.apache.openjpa.jdbc.sql.H2Dictionary(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1),BooleanRepresentation=STRING_10)"/>
--->
             <property name="openjpa.jdbc.DBDictionary"
                       value="(BitTypeName=VARCHAR(1),BooleanTypeName=VARCHAR(1),BooleanRepresentation=STRING_10)"/>
 
