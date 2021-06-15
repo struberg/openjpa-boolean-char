@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import at.struct.openjpatest.entities.Customer;
-import junit.framework.Assert;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;

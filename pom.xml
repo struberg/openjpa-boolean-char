@@ -6,15 +6,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <openjpa.version>2.4.1</openjpa.version>
-        <sql.action>build</sql.action>
+        <openjpa.version>2.4.3</openjpa.version>
 
-        <h2.version>1.4.195</h2.version>
+        <h2.version>1.4.196</h2.version>
 
         <database.vendor>h2</database.vendor>
 
         <database.driver.name>org.h2.Driver</database.driver.name>
-        <database.connection.url>jdbc:h2:file:/tmp/openjpatestdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9099;MAX_LENGTH_INPLACE_LOB=4096</database.connection.url>
+        <database.connection.url>jdbc:h2:file:/tmp/openjpatestdb;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9099</database.connection.url>
         <database.user>sa</database.user>
         <database.password></database.password>
         <database.dbdictionary>org.apache.openjpa.jdbc.sql.H2Dictionary</database.dbdictionary>
@@ -22,18 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_2.0_spec</artifactId>
-            <version>1.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
-            <version>${openjpa.version}</version>
-        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -89,13 +76,69 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.openjpa</groupId>
                 <artifactId>openjpa-maven-plugin</artifactId>
                 <version>${openjpa.version}</version>
+                <configuration>
+                    <sqlAction>refresh</sqlAction>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>${h2.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>JPA22</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-jpa_2.2_spec</artifactId>
+                    <version>1.1</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.openjpa</groupId>
+                    <artifactId>openjpa</artifactId>
+                    <version>${openjpa.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>JPA20</id>
+            <properties>
+                <openjpa.version>2.4.3</openjpa.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-jpa_2.0_spec</artifactId>
+                    <version>1.1</version>
+                    <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.openjpa</groupId>
+                    <artifactId>openjpa</artifactId>
+                    <version>${openjpa.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 
 </project>

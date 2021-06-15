@@ -15,6 +15,7 @@ public class Customer {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "OTHER_NAME")
     private String name;
 
     /**
