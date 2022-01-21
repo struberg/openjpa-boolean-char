@@ -8,7 +8,7 @@
     <properties>
         <openjpa.version>2.4.3</openjpa.version>
 
-        <h2.version>1.4.196</h2.version>
+        <h2.version>2.1.210</h2.version>
 
         <database.vendor>h2</database.vendor>
 
